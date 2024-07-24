@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Sokoban-Images/Sokoban-logo.png" type="image/x-icon">
+    <title>Sokoban</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            background-color: #000;
+            background-image: linear-gradient(45deg, #000428, #004e92);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .contains-every {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 80%;
+            width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contains-every:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .header img {
+            margin-bottom: 0;
+            width: 150px;
+            height: auto;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            color: #32CD32;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.1s, filter 0.3s;
+        }
+
+        button img {
+            width: 80px;
+            height: auto;
+        }
+
+        button:hover img {
+            filter: brightness(1.2);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 350px) {
+            .contains-every {
+                width: 90%;
+                height: auto;
+            }
+
+            .header img {
+                width: 100px;
+            }
+
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .buttons {
+                margin-top: 30px;
+            }
+
+            button img {
+                width: 60px;
+            }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="contains-every">
+        <audio class="bg-music" loop src="Sokoban-Images/bg-music.mp3"></audio>
+        <div class="container">
+            <div class="header">
+                <img src="Sokoban-Images/Sokoban-head.png" alt="Sokoban">
+                <h1>SOKOBAN</h1>
+            </div>
+            <div class="buttons">
+                <button class="menu-button"><img src="Sokoban-Images/menu-icon.png" alt="Menu"></button>
+                <a href="levels.html"><button class="play-button"><img src="Sokoban-Images/play-icon.png"
+                            alt="Play"></button></a>
+                <button class="audio-button"><img class="audio-img" src="Sokoban-Images/audio-icon.png"
+                        alt="Audio"></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const audioButton = document.querySelector('.audio-button');
+        const audioImg = document.querySelector('.audio-img');
+        const bgMusic = document.querySelector('.bg-music');
+
+        bgMusic.play();
+
+        audioButton.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                audioImg.src = 'Sokoban-Images/audio-icon.png';
+            } else {
+                bgMusic.pause();
+                audioImg.src = 'Sokoban-Images/audio-icon-muted.png';
+            }
+        });
+
+        const stars = document.querySelector('.stars');
+
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            stars.appendChild(star);
+        }
+    </script>
+</body>
+
+</html>
