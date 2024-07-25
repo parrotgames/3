@@ -1,2 +1,2 @@
-# 3
+# sokoban
 Sokoban Game
